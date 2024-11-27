@@ -34,7 +34,7 @@ export default function TagPage({ params }: { params: { tag: string } }) {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold mb-8">Posts tagged with "{tag}"</h1>
+        <h1 className="text-4xl font-bold mb-8">Posts tagged with {tag}</h1>
         <div className="space-y-12">
           {filteredPosts.map((post) => (
             <BlogPost key={post.slug} {...post} />
@@ -45,7 +45,7 @@ export default function TagPage({ params }: { params: { tag: string } }) {
         )}
       </main>
       <footer className="py-6 text-center text-gray-500 text-sm">
-        © 2023 Minimalist Blog. All rights reserved.
+        © 2024 Sanedge Blog. All rights reserved.
       </footer>
     </div>
   )
