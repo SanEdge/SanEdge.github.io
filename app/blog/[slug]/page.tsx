@@ -1,11 +1,6 @@
-'use client'
-
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import { Header } from '../../../components/header'
-import { ArrowLeft } from 'lucide-react'
+import ContentBlog from "../../../components/contentblog";
 
 // This is sample data. In a real application, you'd fetch this from an API or database.
 const posts = [
@@ -69,6 +64,12 @@ Go is an excellent language for building web servers, network programming, and d
   }
 ]
 
+export async function generateStaticParams() {
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = posts.find(post => post.slug === params.slug)
 
@@ -79,32 +80,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link href="/blog" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Blog
-        </Link>
-        <article>
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <div className="flex items-center justify-between mb-6">
-            <time className="text-gray-600">{post.date}</time>
-            <div className="flex space-x-2">
-              {post.tags.map((tag) => (
-                <Link
-                  key={tag}
-                  href={`/blog/tag/${tag}`}
-                  className="text-sm bg-gray-200 text-gray-700 px-2 py-1 rounded hover:bg-gray-300 transition-colors"
-                >
-                  {tag}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="prose prose-gray max-w-none">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
-          </div>
-        </article>
-      </main>
+      <ContentBlog post={post} />
       <footer className="py-6 text-center text-gray-500 text-sm">
         © 2023 Minimalist Blog. All rights reserved.
       </footer>
