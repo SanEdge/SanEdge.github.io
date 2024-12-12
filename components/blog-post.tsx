@@ -1,8 +1,14 @@
 import Link from 'next/link'
-import { PostTag } from "../interfaces/Posts"
 
+interface BlogPostProps {
+  title: string
+  excerpt: string
+  date: string
+  slug: string
+  tags: string[]
+}
 
-export function BlogPost({ title, excerpt, date, slug, tags }: PostTag) {
+export function BlogPost({ title, excerpt, date, slug, tags }: BlogPostProps) {
   return (
     <article className="mb-12">
       <Link href={`/blog/${slug}`} className="block">

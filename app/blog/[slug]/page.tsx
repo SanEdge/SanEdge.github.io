@@ -1,11 +1,11 @@
-import { notFound } from 'next/navigation'
-import { Header } from '../../../components/header'
-import ContentBlog from "../../../components/contentblog";
+import { notFound } from 'next/navigation';
+import { Header } from '../../../components/header';
+import ContentBlog from '../../../components/contentblog';
 
 // This is sample data. In a real application, you'd fetch this from an API or database.
 const posts = [
   {
-    title: "Getting Started with Golang",
+    title: 'Getting Started with Golang',
     content: `
 # Getting Started with Golang
 
@@ -44,37 +44,39 @@ This program will print 'Hello, World!' to the console when run.
 
 Go is an excellent language for building web servers, network programming, and developing large-scale distributed systems. Its simplicity and efficiency make it a popular choice for both beginners and experienced developers.
     `,
-    date: "2023-05-15",
-    slug: "getting-started-with-golang",
-    tags: ["golang", "programming"]
+    date: '2023-05-15',
+    slug: 'getting-started-with-golang',
+    tags: ['golang', 'programming'],
   },
   {
-    title: "Building RESTful APIs with Golang",
-    content: "This is a placeholder for the full content of the 'Building RESTful APIs with Golang' post.",
-    date: "2023-05-22",
-    slug: "building-restful-apis-with-golang",
-    tags: ["golang", "api", "backend"]
+    title: 'Building RESTful APIs with Golang',
+    content:
+      "This is a placeholder for the full content of the 'Building RESTful APIs with Golang' post.",
+    date: '2023-05-22',
+    slug: 'building-restful-apis-with-golang',
+    tags: ['golang', 'api', 'backend'],
   },
   {
-    title: "JavaScript ES6 Features",
-    content: "This is a placeholder for the full content of the 'JavaScript ES6 Features' post.",
-    date: "2023-05-29",
-    slug: "javascript-es6-features",
-    tags: ["javascript", "frontend"]
-  }
-]
+    title: 'JavaScript ES6 Features',
+    content:
+      "This is a placeholder for the full content of the 'JavaScript ES6 Features' post.",
+    date: '2023-05-29',
+    slug: 'javascript-es6-features',
+    tags: ['javascript', 'frontend'],
+  },
+];
 
 export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = posts.find(post => post.slug === params.slug)
+  const post = posts.find((post) => post.slug === params.slug);
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -85,6 +87,5 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
         © 2023 Minimalist Blog. All rights reserved.
       </footer>
     </div>
-  )
+  );
 }
-

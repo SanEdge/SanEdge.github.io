@@ -6,7 +6,7 @@ export function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-gray-900">
-            Sanedge Blog
+            Minimalist Blog
           </Link>
           <ul className="flex space-x-6">
             <li>
@@ -17,6 +17,11 @@ export function Header() {
             <li>
               <Link href="/blog" className="text-gray-600 hover:text-gray-900">
                 Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/courses" className="text-gray-600 hover:text-gray-900">
+                Courses
               </Link>
             </li>
             <li>
