@@ -2,6 +2,7 @@ import { Header } from '../../../../../components/header';
 import { notFound } from 'next/navigation';
 
 import ContentLesson from '@/components/contentlesson';
+import { Course, Lesson } from '@/interfaces/Lesson';
 
 // This is sample data. In a real application, you'd fetch this from an API or database.
 const courses = [
@@ -80,8 +81,8 @@ JSX is a powerful feature in React that allows you to write HTML-like syntax dir
 ];
 
 export async function generateStaticParams() {
-  const paths = courses.flatMap((course) =>
-    course.lessons.map((lesson) => ({
+  const paths = courses.flatMap((course: Course) =>
+    course.lessons.map((lesson: Lesson) => ({
       id: course.id.toString(),
       slug: lesson.slug,
     }))
@@ -94,8 +95,12 @@ export default function LessonDetail({
 }: {
   params: { id: string; slug: string };
 }) {
-  const course = courses.find((course) => course.id === parseInt(params.id));
-  const lesson = course?.lessons.find((lesson) => lesson.slug === params.slug);
+  const course = courses.find(
+    (course: Course) => course.id === parseInt(params.id)
+  );
+  const lesson = course?.lessons.find(
+    (lesson: Lesson) => lesson.slug === params.slug
+  );
 
   if (!course || !lesson) {
     notFound();

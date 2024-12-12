@@ -8,13 +8,14 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Course, Lesson } from '@/interfaces/Lesson';
 
 export default function ContentLesson({
   course,
   lesson,
 }: {
-  course: any;
-  lesson: any;
+  course: Course;
+  lesson: Lesson;
 }) {
   return (
     <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -34,16 +35,17 @@ export default function ContentLesson({
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
-            code({ node, inline, className, children, ...props }) {
+            code({ inline, className, children, ...props }: any) {
               const match = /language-(\w+)/.exec(className || '');
               return !inline && match ? (
                 <SyntaxHighlighter
                   {...props}
-                  children={String(children).replace(/\n$/, '')}
                   style={atomDark}
                   language={match[1]}
                   PreTag="div"
-                />
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
               ) : (
                 <code {...props} className={className}>
                   {children}
